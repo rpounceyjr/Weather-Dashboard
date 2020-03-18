@@ -13,8 +13,10 @@ var citiesArray = [];
 //function to create buttons from citiesArray
 for (var i = 0; i < citiesArray.length; i++) {
     var cityDiv = $("<div>");
+    cityDiv.addClass("city-div");
+    cityDiv.data("city", citiesArray[i]);
     cityDiv.text(citiesArray[i]);
-    $(".previous-searches").append(cityDiv);
+    $(".previous-searches").prepend(cityDiv);
 }
 
 submitButton.on("click", function () {
@@ -47,4 +49,10 @@ submitButton.on("click", function () {
         }
   
     })
+})
+
+//click listener to get forecast from previously searched div
+$(".city-div").on("click", function(){
+    
+    console.log($(this).data("city"));
 })
