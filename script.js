@@ -2,7 +2,7 @@ var submitButton = $("#basic-addon2");
 var currentWeatherEl = $(".current-container");
 var apiKey = "9846b5a3775575d834176eed85a62f86";
 var citiesArray = [];
-
+var weatherDiv;
 //function to populate citiesArray from localStorage
 
     for (var i = 0; i < localStorage.length; i++) {
@@ -35,7 +35,7 @@ submitButton.on("click", function () {
 
         citiesArray.push(cityName);
 
-        var weatherDiv = $("<div>");
+        weatherDiv = $("<div>");
         weatherDiv.html(`<h3>${cityName}</h3> 
         <br>
         ${temperature}  
@@ -53,6 +53,31 @@ submitButton.on("click", function () {
 
 //click listener to get forecast from previously searched div
 $(".city-div").on("click", function(){
-    
+
     console.log($(this).data("city"));
+    if(weatherDiv){
+    weatherDiv.remove();
+    }
+    // var input = $(".form-control").val();
+    var cityData = $(this).data("city");
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityData + "&appid=" + apiKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        
+        var cityName = response.name;
+        var temperature = response.main.temp;
+        var windSpeed = response.wind.speed;
+
+        weatherDiv = $("<div>");
+        weatherDiv.html(`<h3>${cityName}</h3> 
+        <br>
+        ${temperature}  
+        <br>
+        ${windSpeed}`)
+        currentWeatherEl.append(weatherDiv);
+    })
+
 })
