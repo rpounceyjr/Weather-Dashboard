@@ -4,6 +4,7 @@ var apiKey = "9846b5a3775575d834176eed85a62f86";
 var citiesArray = [];
 var weatherDiv;
 var uvDiv;
+var fiveDayEl = $("#five-day-forecast");
 //function to populate citiesArray from localStorage
 
     for (var i = 0; i < localStorage.length; i++) {
@@ -46,7 +47,7 @@ submitButton.on("click", function () {
         citiesArray.push(cityName);
 
         weatherDiv = $("<div>");
-        weatherDiv.html(`<h3>${cityName}</h3> 
+        weatherDiv.html(`<h3>${cityName}</h3> <img src = http://openweathermap.org/img/wn/${icon}@2x.png>
         Temperature: ${temperature} °F
         <br>
         Humidity: ${humidity} %
@@ -72,23 +73,23 @@ submitButton.on("click", function () {
         }
 
 
-        //removes 5-day forecast
-        // fiveDayDiv = $(".five-day-forecast");
+        // removes 5-day forecast
+        fiveDayDiv = $(".five-day-forecast");
     
-        // if(fiveDayDiv){
-        //     fiveDayDiv.remove();
-        // }
+        if(fiveDayDiv){
+            fiveDayDiv.remove();
+        }
         var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&units=imperial&appid=" + apiKey + "&cnt=40";
         //call to get 5-day
         $.ajax({
             url: fiveDayURL,
             method: "GET"
         }).then(function (fiveDayResponse) {
+            var count = 0;
             console.log(fiveDayResponse);
         for (var i = 7; i < fiveDayResponse.list.length; i += 8){
             console.log("something happened");
             // date, icon, temp, humidity
-            var count = 0;
             var fiveDayDate = fiveDayResponse.list[i].dt_text;
             var fiveDayIcon = fiveDayResponse.list[i].weather[0].icon;
             var fiveDayWeather = fiveDayResponse.list[i].main.temp;
@@ -100,19 +101,18 @@ submitButton.on("click", function () {
             var fiveDayDiv = $("<div>");
             fiveDayDiv.html(`${fiveDayDate}
             <br>
-            ${fiveDayIcon}
+            <img src = http://openweathermap.org/img/wn/${fiveDayIcon}@2x.png>
             <br>
             Temperature: ${fiveDayWeather} °F
             <br>
             Humidity: ${fiveDayHumidity} %`);
-            var fiveDayDiv = $(".five-day-forecast").data("count", count);
-            fiveDayDiv.append(fiveDayDiv);
+            //.data("count", count);
+            console.log(fiveDayEl);
+            fiveDayEl.append(fiveDayDiv);
 
             count++;
         }
         })
-
-  
     })
 })
 
@@ -137,11 +137,11 @@ $(".city-div").on("click", function(){
         var cityName = response.name;
         var temperature = response.main.temp;
         var humidity = response.main.humidity;
-        var icon = response.weather.icon;
+        var icon = response.weather[0].icon;
         var windSpeed = response.wind.speed;
        
         weatherDiv = $("<div>");
-        weatherDiv.html(`<h3>${cityName}</h3> 
+        weatherDiv.html(`<h3>${cityName}</h3> <img src = http://openweathermap.org/img/wn/${icon}@2x.png>
         Temperature: ${temperature} °F
         <br>
         Humidity: ${humidity} %
