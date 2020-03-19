@@ -3,7 +3,6 @@ var currentWeatherEl = $(".current-container");
 var apiKey = "9846b5a3775575d834176eed85a62f86";
 var citiesArray = [];
 var weatherDiv;
-var fiveDayDiv;
 var uvDiv;
 //function to populate citiesArray from localStorage
 
@@ -38,7 +37,7 @@ submitButton.on("click", function () {
         var cityName = response.name;
         var temperature = response.main.temp;
         var humidity = response.main.humidity;
-        var icon = response.weather.icon;
+        var icon = response.weather[0].icon;
         var windSpeed = response.wind.speed;
         var latitude = response.coord.lat;
         var longitude = response.coord.lon;
@@ -63,7 +62,7 @@ submitButton.on("click", function () {
             method: "GET"
         }).then(function(uvResponse){
             var uv = uvResponse[1].value;
-            uvDiv = $("<div>").text(uv);
+            uvDiv = $("<div>").text(`UV Index: ${uv}`);
             weatherDiv.append(uvDiv);
         })
 
@@ -73,20 +72,45 @@ submitButton.on("click", function () {
         }
 
 
-        //five day forecast call
-        fiveDayDiv = $(".five-day-forecast");
+        //removes 5-day forecast
+        // fiveDayDiv = $(".five-day-forecast");
     
         // if(fiveDayDiv){
         //     fiveDayDiv.remove();
         // }
-        // var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&units=imperial&appid=" + apiKey;
-        // //call to get 5-day
-        // $.ajax({
-        //     url: fiveDayURL,
-        //     method: "GET"
-        // }).then(function (fiveDayResponse) {
-        //     console.log(fiveDayResponse);
-        // })
+        var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&units=imperial&appid=" + apiKey + "&cnt=40";
+        //call to get 5-day
+        $.ajax({
+            url: fiveDayURL,
+            method: "GET"
+        }).then(function (fiveDayResponse) {
+            console.log(fiveDayResponse);
+        for (var i = 7; i < fiveDayResponse.list.length; i += 8){
+            console.log("something happened");
+            // date, icon, temp, humidity
+            var count = 0;
+            var fiveDayDate = fiveDayResponse.list[i].dt_text;
+            var fiveDayIcon = fiveDayResponse.list[i].weather[0].icon;
+            var fiveDayWeather = fiveDayResponse.list[i].main.temp;
+            var fiveDayHumidity = fiveDayResponse.list[i].main.humidity;
+            // console.log(fiveDayDate);
+            // console.log(fiveDayIcon);
+            // console.log(fiveDayWeather);
+            // console.log(fiveDayHumidity);
+            var fiveDayDiv = $("<div>");
+            fiveDayDiv.html(`${fiveDayDate}
+            <br>
+            ${fiveDayIcon}
+            <br>
+            Temperature: ${fiveDayWeather} °F
+            <br>
+            Humidity: ${fiveDayHumidity} %`);
+            var fiveDayDiv = $(".five-day-forecast").data("count", count);
+            fiveDayDiv.append(fiveDayDiv);
+
+            count++;
+        }
+        })
 
   
     })
