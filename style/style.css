@@ -1,7 +1,15 @@
 .current-container {
-    height: 200px;
+    height: 300px;
 }
 
 .five-day-container {
-    height: 200px;
+    height: 400px;
+}
+.weather-div{
+    text-align: center;
+}
+
+.five-day-div{
+    display: inline-block;
+    margin: 30px;
 }
