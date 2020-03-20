@@ -1,5 +1,5 @@
 .current-container {
-    height: 300px;
+    height: 400px;
 }
 
 .five-day-container {
@@ -11,5 +11,6 @@
 
 .five-day-div{
     display: inline-block;
-    margin: 30px;
+    margin: 28px;
+    text-align: center;
 }

@@ -48,8 +48,9 @@ submitButton.on("click", function () {
 
         weatherDiv = $("<div>");
         weatherDiv.addClass("weather-div")
-        weatherDiv.html(`<h3>${cityName}</h3> <img src = http://openweathermap.org/img/wn/${icon}@2x.png>
-        Temperature: <h4>${temperature} °F</h4>
+        weatherDiv.html(`<h3>${cityName}</h3> 
+        <img src = http://openweathermap.org/img/wn/${icon}@2x.png>
+        <h5>${temperature} °F</h5>
         <br>
         Humidity: ${humidity} %
         <br>
@@ -85,17 +86,18 @@ submitButton.on("click", function () {
         }).then(function (fiveDayResponse) {
             console.log(fiveDayResponse);
             for (var i = 7; i < fiveDayResponse.list.length; i += 8) {
-                var fiveDayDate = fiveDayResponse.list[i].dt_text;
+                var fiveDayDate = fiveDayResponse.list[i].dt_txt;
                 var fiveDayIcon = fiveDayResponse.list[i].weather[0].icon;
                 var fiveDayWeather = fiveDayResponse.list[i].main.temp;
                 var fiveDayHumidity = fiveDayResponse.list[i].main.humidity;
                 var fiveDayDiv = $("<div>");
+                var fiveDayFormatted = fiveDayDate.replace(" ","-").split("-")[1] + "/" + fiveDayDate.replace(" ","-").split("-")[2];
                 fiveDayDiv.addClass("five-day-div");
-                fiveDayDiv.html(`${fiveDayDate}
+                fiveDayDiv.html(`${fiveDayFormatted}
             <br>
             <img src = http://openweathermap.org/img/wn/${fiveDayIcon}@2x.png>
             <br>
-            Temperature: ${fiveDayWeather} °F
+            <h5>${fiveDayWeather} °F</h5>
             <br>
             Humidity: ${fiveDayHumidity} %`);
                 console.log(fiveDayEl);
@@ -133,7 +135,7 @@ $(".city-div").on("click", function () {
         weatherDiv = $("<div>");
         weatherDiv.addClass("weather-div");
         weatherDiv.html(`<h3>${cityName}</h3> <img src = http://openweathermap.org/img/wn/${icon}@2x.png>
-        Temperature: ${temperature} °F
+        <h5>${temperature} °F</h5>
         <br>
         Humidity: ${humidity} %
         <br>
@@ -161,13 +163,15 @@ $(".city-div").on("click", function () {
         }).then(function (fiveDayResponse) {
             console.log(fiveDayResponse);
             for (var i = 7; i < fiveDayResponse.list.length; i += 8) {
-                var fiveDayDate = fiveDayResponse.list[i].dt_text;
+                var fiveDayDate = fiveDayResponse.list[i].dt_txt;
                 var fiveDayIcon = fiveDayResponse.list[i].weather[0].icon;
                 var fiveDayWeather = fiveDayResponse.list[i].main.temp;
                 var fiveDayHumidity = fiveDayResponse.list[i].main.humidity;
                 var fiveDayDiv = $("<div>");
+                var fiveDayFormatted = fiveDayDate.replace(" ","-").split("-")[1] + "/" + fiveDayDate.replace(" ","-").split("-")[2];
                 fiveDayDiv.addClass("five-day-div")
-                fiveDayDiv.html(`${fiveDayDate}
+                console.log(fiveDayDate);
+                fiveDayDiv.html(`${fiveDayFormatted}
             <br>
             <img src = http://openweathermap.org/img/wn/${fiveDayIcon}@2x.png>
             <br>
