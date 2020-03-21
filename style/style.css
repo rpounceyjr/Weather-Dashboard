@@ -1,14 +1,25 @@
+.container{
+    font-family: 'Raleway', sans-serif;
+}
+.jumbotron{
+    font-family: 'Raleway', sans-serif;
+    background-image: linear-gradient(to bottom right,#ffff99, white);
+}
 .current-container {
+    font-family: 'Raleway', sans-serif;
     border-left: 3px solid black;
     border-bottom: 3px solid black;
     border-top: 3px solid grey;
     border-right: 3px solid grey;
+    background-image: linear-gradient(to bottom right,#ffff99, white);
 }
 .five-day-container {
+    font-family: 'Raleway', sans-serif;
     border-left: 3px solid black;
     border-bottom: 3px solid black;
     border-top: 3px solid grey;
     border-right: 3px solid grey;
+    background-image: linear-gradient(to bottom right,#ffff99, white);
 }
 #basic-addon2:hover{
     cursor: pointer;
@@ -17,15 +28,13 @@
     text-align: center;
     padding-bottom: 20px;
 }
-
 .five-day-div{
     display: inline-block;
     margin: 28px;
     text-align: center;
 }
-
 .city-div{
-    background-color: lightgray;
+    background-image: linear-gradient(to bottom right, cornflowerblue, white);
     margin-left: 3px;
     margin-bottom: 5px;
     border-left: 3px solid black;
@@ -34,7 +43,20 @@
     border-right: 3px solid grey;
     text-align: center;
 }
-
 .city-div:hover{
     cursor: pointer;
+}
+.uv-div{
+    width: 125px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 450px){
+    .five-day-div{
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
