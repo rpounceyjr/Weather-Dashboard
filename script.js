@@ -59,6 +59,7 @@ function getEverything(searchTerm){
         }).then(function (uvResponse) {
             var uv = uvResponse[1].value;
             uvDiv = $("<div>").text(`UV Index: ${uv}`);
+            uvDiv.addClass("uv-div");
             weatherDiv.append(uvDiv);
         })
 
