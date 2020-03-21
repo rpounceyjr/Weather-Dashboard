@@ -129,6 +129,6 @@ $(".city-div").on("click", function () {
     getEverything(cityData)
 })
 
-var lastSearch = localStorage[localStorage.length - 1];
-if(localStorage){
-getEverything(lastSearch);}
+// var lastSearch = localStorage[localStorage.length - 1];
+// if(localStorage){
+// getEverything(lastSearch);}
