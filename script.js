@@ -20,7 +20,7 @@ for (var i = 0; i < citiesArray.length; i++) {
 }
 //function that makes api calls for current forecast, 5-day forecast, and uv index
 function getEverything(searchTerm){
-    var currentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=imperial&appid=" + apiKey;
+    var currentWeatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=imperial&appid=" + apiKey;
     $.ajax({
         url: currentWeatherURL,
         method: "GET"
@@ -54,7 +54,7 @@ function getEverything(searchTerm){
         currentWeatherEl.append(weatherDiv);
 
         //api call for uv index
-        var uvURL = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + apiKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=1"
+        var uvURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + apiKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=1"
         $.ajax({
             url: uvURL,
             method: "GET"
@@ -80,7 +80,7 @@ function getEverything(searchTerm){
         // removes 5-day forecast
         fiveDayEl.empty();
 
-        var fiveDayURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial&appid=" + apiKey + "&cnt=40";
+        var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial&appid=" + apiKey + "&cnt=40";
         //call to get 5-day
         $.ajax({
             url: fiveDayURL,
