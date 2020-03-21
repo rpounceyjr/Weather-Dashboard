@@ -86,7 +86,6 @@ function getEverything(searchTerm){
             url: fiveDayURL,
             method: "GET"
         }).then(function (fiveDayResponse) {
-            console.log(fiveDayResponse);
             for (var i = 0; i < fiveDayResponse.list.length; i++) {
                 if (fiveDayResponse.list[i].dt_txt.indexOf("15:00:00") !== -1) {
                     var fiveDayDate = fiveDayResponse.list[i].dt_txt;
@@ -103,7 +102,6 @@ function getEverything(searchTerm){
         <h5>${fiveDayWeather} °F</h5>
         <br>
         Humidity: ${fiveDayHumidity} %`);
-                    console.log(fiveDayEl);
                     fiveDayEl.append(fiveDayDiv);
                 }
             }
