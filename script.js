@@ -29,7 +29,6 @@ submitButton.on("click", function () {
     }
     var input = $(".form-control").val();
     var currentWeatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=imperial&appid=" + apiKey;
-    function getEverything() {
         $.ajax({
             url: currentWeatherURL,
             method: "GET"
@@ -42,9 +41,12 @@ submitButton.on("click", function () {
             var windSpeed = response.wind.speed;
             var latitude = response.coord.lat;
             var longitude = response.coord.lon;
-            //need loop to push cityName into citiesArray if it isn't already there
-
-            citiesArray.push(cityName);
+            
+            // //loop to check if city is in city array, push if not
+            // if (citiesArray.indexOf(cityName) === -1){
+            // citiesArray.push(cityName);
+            // }
+            citiesArray.push(cityName)
 
             weatherDiv = $("<div>");
             weatherDiv.addClass("weather-div")
@@ -116,7 +118,6 @@ submitButton.on("click", function () {
                 }
             })
         })
-    }
 })
 
 //click listener to get forecast from previously searched div
