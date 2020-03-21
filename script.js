@@ -130,5 +130,5 @@ $(".city-div").on("click", function () {
 })
 
 var lastSearch = localStorage[localStorage.length - 1];
-if(localStorage){
+if(localStorage.length > 0){
 getEverything(lastSearch);}
