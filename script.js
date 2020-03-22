@@ -37,7 +37,7 @@ function getEverything(searchTerm){
         // if (citiesArray.indexOf(cityName) === -1){
         // citiesArray.push(cityName);
         // }
-        citiesArray.push(cityName)
+        // citiesArray.push(cityName)
 
         weatherDiv = $("<div>");
         weatherDiv.addClass("weather-div")
@@ -116,6 +116,8 @@ submitButton.on("click", function () {
         weatherDiv.remove();
     }
     var input = $(".form-control").val();
+    //push the city that is being searched for into the citiesArray for localStorage
+    citiesArray.push(input.trim())
     getEverything(input);
 })
 
@@ -131,4 +133,5 @@ $(".city-div").on("click", function () {
 
 var lastSearch = localStorage[localStorage.length - 1];
 if(localStorage.length > 0){
-getEverything(lastSearch);}
+getEverything(lastSearch);
+}
